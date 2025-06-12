@@ -1,0 +1,633 @@
+﻿@model List<FinalProject.MVC.Models.Room>
+@{
+    ViewData["Title"] = "Home Page";
+    if (Model == null)
+    {
+        <div class="alert alert-danger">No rooms data available.</div>
+        return;
+
+    }
+}
+
+<section class="page-header"  style="position: relative; height: 80vh; overflow: hidden;" >
+    <!-- Background Image -->
+    <img src="~/assets/images/backgrounds/slider-1-1.jpg"
+         alt="Hotel Background"
+         style="position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;">
+
+        <!-- Dark Overlay -->
+        <div style="position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                background-color: rgba(0,0,0,0.5);">
+        </div>
+
+        <!-- Content Container -->
+        <div style="position: relative;
+                z-index: 2;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: white;
+                padding: 20px;">
+
+            <!-- Text Container with Background -->
+            <div style="background-color: rgba(0, 0, 0, 0.4);
+                   backdrop-filter: blur(5px);
+                   padding: 30px 50px;
+                   border-radius: 8px;
+                   margin-bottom: 20px;
+                   border: 1px solid rgba(255,255,255,0.1);">
+                <!-- Main Heading -->
+                <h1 style="font-size: 4rem;
+                       margin-bottom: 1rem;
+                       font-weight: 700;
+ color:white;
+                       text-transform: uppercase;
+                       letter-spacing: 3px;
+                       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                ENJOY LUXURY EXPERIENCE
+                </h1>
+
+                <!-- Subheading -->
+                <p style="font-size: 1.8rem;
+                     margin-bottom: 0;
+color: #d4af37;
+                     text-transform: uppercase;
+                     letter-spacing: 2px;
+                     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
+                THE BEST 5 STAR HOTEL
+                
+                </p>
+            </div>
+
+            <!-- Search Form -->
+            <div style="background: rgba(255,255,255,0.9);
+                   padding: 30px;
+                   border-radius: 8px;
+                   width: 80%;
+                   max-width: 900px;
+                   margin-top: 20px;
+                   /* box-shadow: 0 5px 15px rgba(0,0,0,0.2);" */>
+                <form asp-controller="Home" asp-action="SearchRooms" method="get">
+                    <div style="display: grid;
+                           grid-template-columns: repeat(5, 1fr) 120px;
+                           gap: 15px;
+                           align-items: end;">
+                        <!-- Capacity -->
+                        <div>
+                            <label style="display: block;
+                                     margin-bottom: 8px;
+                                     text-align: left;
+                                     color: #333;
+                                     font-weight: 600;">Capacity</label>
+                            <input type="number"
+                                   name="capacity"
+                                   placeholder="e.g. 2"
+                                   style="width: 100%;
+                                      padding: 10px;
+                                      border: 1px solid #ddd;
+                                      border-radius: 4px;">
+                        </div>
+
+                        <!-- Min Price -->
+                        <div>
+                            <label style="display: block;
+                                     margin-bottom: 8px;
+                                     text-align: left;
+                                     color: #333;
+                                     font-weight: 600;">Minimum</label>
+                            <input type="number"
+                                   name="minPrice"
+                                   placeholder="$50"
+                                   style="width: 100%;
+                                      padding: 10px;
+                                      border: 1px solid #ddd;
+                                      border-radius: 4px;">
+                        </div>
+
+                        <!-- Max Price -->
+                        <div>
+                            <label style="display: block;
+                                     margin-bottom: 8px;
+                                     text-align: left;
+                                     color: #333;
+                                     font-weight: 600;">Maximum</label>
+                            <input type="number"
+                                   name="maxPrice"
+                                   placeholder="$200"
+                                   style="width: 100%;
+                                      padding: 10px;
+                                      border: 1px solid #ddd;
+                                      border-radius: 4px;">
+                        </div>
+
+                        <!-- Check-in -->
+                        <div>
+                            <label style="display: block;
+                                     margin-bottom: 8px;
+                                     text-align: left;
+                                     color: #333;
+                                     font-weight: 600;">Check-in</label>
+                            <input type="date"
+                                   name="checkIn"
+                                   style="width: 100%;
+                                      padding: 10px;
+                                      border: 1px solid #ddd;
+                                      border-radius: 4px;">
+                        </div>
+
+                        <!-- Check-out -->
+                        <div>
+                            <label style="display: block;
+                                     margin-bottom: 8px;
+                                     text-align: left;
+                                     color: #333;
+                                     font-weight: 600;">Check-out</label>
+                            <input type="date"
+                                   name="checkOut"
+                                   style="width: 100%;
+                                      padding: 10px;
+                                      border: 1px solid #ddd;
+                                      border-radius: 4px;">
+                        </div>
+
+                        <!-- Search Button -->
+                        <div>
+                            <button type="submit"
+                                    style="width: 100%;
+                                       padding: 12px;
+                                       background-color: #d4af37;
+                                       color: white;
+                                       border: none;
+                                       border-radius: 4px;
+                                       font-weight: 600;
+                                       cursor: pointer;">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            @* </div> *@
+        </div>
+    </div>
+    <!-- main-slider-Done -->
+
+</section>
+<!-- main-slider-end --> 
+        
+
+
+<!-- About Section Start -->
+<section class="about-three">
+    <div class="container">
+        <div class="row align-items-center gutter-y-40">
+            <div class="col-lg-6">
+                <div class="about-three__thumb">
+                    <div class="about-three__thumb__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                        <img src="~/assets/images/blog/blog-5-1.jpg" alt="solinom image">
+                    </div>
+                    <div class="about-three__thumb__inner">
+                        <div class="about-three__thumb__small-image">
+                            <img src="~/assets/images/blog/blog-s-5-1.jpg" alt="solinom image">
+                        </div>
+                        <div class="about-three__thumb__element">
+                            <img src="~/assets/images/shapes/about-2-1.png" alt>
+                        </div>
+                        <div class="about-three__thumb__element-two">
+                            <img src="~/assets/images/shapes/border-3-1.png" alt>
+                        </div>
+                    </div>
+                    <div class="about-three__thumb__logo">
+                        <img src="~/assets/images/about/icon.png" alt>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-three__content">
+                    <div class="sec-title text-start sec-title--two">
+
+                        <img src="~/assets/images/shapes/sec-title-s-1.png" alt="WELCOME TO HOTEL" class="sec-title__img">
+
+
+                        <h6 class="sec-title__tagline bw-split-in-right">WELCOME TO HOTEL</h6>
+
+                        <h3 class="sec-title__title bw-split-in-up">Get to Know Our Luxury Hotels</h3>
+                    </div>
+                    <p class="about-three__text wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters</p>
+                    <ul class="about-three__list list-unstyled">
+                        <li class="about-three__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                            <div class="about-three__list__icon">
+                                <i class="icon-door-lock-1"></i>
+                            </div>
+                            <h4 class="about-three__list__title"><a href="blog-details-left.html">Suite Smart Key</a></h4>
+                        </li>
+                        <li class="about-three__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='500ms'>
+                            <div class="about-three__list__icon">
+                                <i class="icon-luggage-2"></i>
+                            </div>
+                            <h4 class="about-three__list__title"><a href="blog-details-left.html">Luggage Deposited</a></h4>
+                        </li>
+                        <li class="about-three__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                            <div class="about-three__list__icon">
+                                <i class="icon-vacuum-cleaner-1"></i>
+                            </div>
+                            <h4 class="about-three__list__title"><a href="blog-details-left.html">Daily Cleaning</a></h4>
+                        </li>
+                        <li class="about-three__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='500ms'>
+                            <div class="about-three__list__icon">
+                                <i class="icon-hotel-service-1"></i>
+                            </div>
+                            <h4 class="about-three__list__title"><a href="blog-details-left.html">Room Service</a></h4>
+                        </li>
+                    </ul>
+                    <a asp-controller="Home" asp-action="About" class="solinom-btn about-three__btn solinom-btn--base">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Feature Section Start -->
+<section class="feature-five">
+    <div class="container">
+        <div class="sec-title text-center sec-title--two">
+            <img src="~/assets/images/shapes/sec-title-s-1.png" alt="FEATURED ROOMS" class="sec-title__img">
+            <h6 class="sec-title__tagline bw-split-in-right">FEATURED ROOMS</h6>
+            <h3 class="sec-title__title bw-split-in-up">Discover Our Rooms</h3>
+        </div>
+        <div class="feature-five__carousel solinom-owl__carousel owl-carousel owl-theme solinom-owl__carousel--with-shadow" data-owl-options='{
+             "items" : 1,
+             "margin" : 0,
+             "loop" : true,
+             "smartSpeed" : 700,
+             "nav" : true,
+             "navText" : ["<span class=\"icon-right-arrow\"></span>","<span class=\"icon-right-arrow2\"></span>"],
+                "dots": false,
+                "autoplay": true,
+                "responsive": {
+                    "0": {
+                        "items": 1
+                    },
+                    "768": {
+                        "items": 2,
+                        "margin": 30
+                    },
+                    "992": {
+                        "items": 2,
+                        "center": false,
+                        "margin": 30
+                    },
+                    "1199": {
+                        "items": 3,
+                        "center": true,
+                        "margin": 30
+                    }
+                }
+            }'>
+
+            @foreach (var room in Model)
+            {
+                    <div class="item">
+                        <div class="feature-five-card wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='000ms'>
+                            <div class="feature-five-card__inner">
+                                <div class="feature-five-card__thumb">
+                                        <img src="~/imgs/rooms/@room.CoverImage" alt="@room.Name">
+                                    <a asp-controller="Home" asp-action="Room1" asp-route-id="@room.Id">
+                                        <p class="feature-five-card__feature">feature</p></a>
+                                    <div class="feature-five-card__thumb__popup">
+                                        <div class="feature-five-card__thumb__popup__love">
+                                            <i class="far fa-heart"></i>
+                                        </div>
+                                        <a href="https://www.youtube.com/watch?v=4jnzf1yj48M" class="feature-five-card__thumb__popup__item video-popup">
+                                            <i class="icon-video-camera-1-1"></i>
+                                        </a>
+                                                <a href="@Url.Content($"~/imgs/rooms/{room.CoverImage}")"
+       class="feature-five-card__thumb__popup__item room-list-card-popup"
+       data-gallery-options='{
+            "items": [
+                {
+                    "src": "@Url.Content($"~/imgs/rooms/{room.CoverImage}")"
+                }
+            ],
+            "gallery": {
+                "enabled": true
+            },
+            "type": "image"
+        }'>
+        <i class="icon-photo-camera-1"></i>
+    </a>
+                                    </div>
+                                </div>
+                                <div class="feature-five-card__content">
+                                    <h4 class="feature-five-card__content__title"><a asp-controller="Home" asp-action="Room1" asp-route-id="@room.Id">@room.Name</a></h4>
+                                    <p class="feature-five-card__content__text"><a asp-controller="Home" asp-action="Room1" asp-route-id="@room.Id">@room.Description</a></p>
+                                </div>
+                                <div class="feature-five-card__content__number">
+                                    <div class="feature-five-card__content__number__price">$@room.Price.ToString("0.00")/<span>night</span></div>
+                                    <p class="feature-five-card__content__number__parson">Person: <strong>@room.Capacity</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+    <div class="feature-five__shape" style="background-image: url(~/assets/images/shapes/feature-2-1.png);"></div>
+</section>
+<!-- Feature Section End -->
+<!-- Why Choose Section Start -->
+<section class="why-choose-one">
+    <div class="why-choose-one__bg jarallax" data-jarallax data-speed="0.3" data-imgPosition="50% -100%" style="background-image: url(assets/images/backgrounds/why-choose-bg.jpg);"></div>
+    <div class="container">
+        <div class="sec-title text-center sec-title--two">
+
+            <img src="~/assets/images/shapes/sec-title-s-1.png" alt="Why choose us" class="sec-title__img">
+
+
+            <h6 class="sec-title__tagline bw-split-in-right">Why choose us</h6>
+
+            <h3 class="sec-title__title bw-split-in-up">Inspired Incentive</h3>
+        </div>
+        <div class="why-choose-one__inner" style="background-image: url(assets/images/resources/why-choose-1-1.jpg);">
+            <div class="why-choose-one__item">
+                <div class="why-choose-one__left">
+                    <h4 class="why-choose-one__item__title">Beautiful Moments You will Never Forget</h4>
+                    <a asp-controller="Home" asp-action="About" class="why-choose-one__item__btn solinom-btn solinom-btn--base">Read More</a>
+                </div>
+            </div>
+            <div class="why-choose-one__item">
+                <div class="why-choose-one__middle">
+                    <ul class="why-choose-one__item__list">
+                        <li>
+                            <div class="why-choose-one__item__icon">
+                                <i class="icon-car-wash-1"></i>
+                            </div>
+                            <div class="why-choose-one__item__content">
+                                <h5 class="why-choose-one__item__content__title">Airport Pickup</h5>
+                                <p class="why-choose-one__item__content__text">It is a long established fact that a reader will be distra</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="why-choose-one__item__icon">
+                                <i class="icon-car-1"></i>
+                            </div>
+                            <div class="why-choose-one__item__content">
+                                <h5 class="why-choose-one__item__content__title">Free Parking</h5>
+                                <p class="why-choose-one__item__content__text">It is a long established fact that a reader will be distra</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="why-choose-one__item__icon">
+                                <i class="icon-swimming-pool-1"></i>
+                            </div>
+                            <div class="why-choose-one__item__content">
+                                <h5 class="why-choose-one__item__content__title">Outdoor Pool</h5>
+                                <p class="why-choose-one__item__content__text">It is a long established fact that a reader will be distra</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="why-choose-one__middle__shape-one">
+                        <img src="~/assets/images/shapes/why-choose-1-2.png" alt>
+                    </div>
+                    <div class="why-choose-one__middle__shape-two">
+                        <img src="~/assets/images/shapes/why-choose-1-3.png" alt>
+                    </div>
+                    <div class="why-choose-one__middle__element-one">
+                        <img src="~/assets/images/shapes/why-choose-1-1.png" alt>
+                    </div>
+                    <div class="why-choose-one__middle__element-two">
+                        <img src="~/assets/images/shapes/why-choose-1-1.png" alt>
+                    </div>
+                </div>
+            </div>
+            <div class="why-choose-one__item">
+                <div class="why-choose-one__right">
+                    <div class="why-choose-one__item__funfact count-box">
+                        <div class="why-choose-one__item__funfact__icon">
+                            <i class="icon-travelling-2"></i>
+                        </div>
+                        <h2 class="why-choose-one__item__funfact__count">
+                            <span class="count-text" data-stop="7300" data-speed="1500"></span>
+                            <span>+</span>
+                        </h2>
+                        <p class="why-choose-one__item__funfact__text">Guests Visit Out Hotel Every Month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Why Choose Section End -->
+<!-- Blog section Start -->
+<section class="blog-three">
+    <div class="blog-three__bg" style="background-image: url(assets/images/shapes/blog-three-3-1.png);"></div>
+    <div class="container">
+        <div class="sec-title text-center sec-title--two">
+
+            <img src="~/assets/images/shapes/sec-title-s-1.png" alt="Latest Article" class="sec-title__img">
+
+
+            <h6 class="sec-title__tagline bw-split-in-right">Latest Article</h6>
+
+            <h3 class="sec-title__title bw-split-in-up">Latest News & Articles from <br> the Blog Posts</h3>
+        </div>
+        <div class="row gutter-y-30">
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card-three wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='100ms'>
+                    <div class="blog-card-three__image">
+                        <img src="~/assets/images/blog/blog-3-1.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <img src="~/assets/images/blog/blog-3-1.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <a asp-controller="Home" asp-action="About" class="blog-card-three__image__link"><span class="sr-only">Check the Top 6 luxury Hotels in the World</span></a>
+                    </div>
+                    <div class="blog-card-three__content">
+                        <div class="blog-card-three__content__inner">
+                            <ul class="list-unstyled blog-card-three__meta">
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-calendar-6"></i>March 08, 2024</a></li>
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-bubble-chat"></i>2 Comment</a></li>
+                            </ul>
+                            <div class="blog-card-three__content__content">
+                                <h3 class="blog-card-three__title"><a href="blog-details-right.html">Check the Top 6 luxury Hotels in the World</a></h3>
+                                <a asp-controller="Home" asp-action="About" class="blog-card-three__btn">
+                                    <span class="solinom-btn">Read more</span>
+                                    <i class="icon-right-arrow2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card-three wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                    <div class="blog-card-three__image">
+                        <img src="~/assets/images/blog/blog-3-2.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <img src="~/assets/images/blog/blog-3-2.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <a href="blog-details-right.html" class="blog-card-three__image__link"><span class="sr-only">Check the Top 6 luxury Hotels in the World</span></a>
+                    </div>
+                    <div class="blog-card-three__content">
+                        <div class="blog-card-three__content__inner">
+                            <ul class="list-unstyled blog-card-three__meta">
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-calendar-6"></i>March 08, 2024</a></li>
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-bubble-chat"></i>2 Comment</a></li>
+                            </ul>
+                            <div class="blog-card-three__content__content">
+                                <h3 class="blog-card-three__title"><a asp-controller="Home" asp-action="About">Check the Top 6 luxury Hotels in the World</a></h3>
+                                <a asp-controller="Home" asp-action="About" class="blog-card-three__btn">
+                                    <span class="solinom-btn">Read more</span>
+                                    <i class="icon-right-arrow2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-card-three wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='500ms'>
+                    <div class="blog-card-three__image">
+                        <img src="~/assets/images/blog/blog-3-3.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <img src="~/assets/images/blog/blog-3-3.jpg" alt="Check the Top 6 luxury Hotels in the World">
+                        <a asp-controller="Home" asp-action="About" class="blog-card-three__image__link"><span class="sr-only">Check the Top 6 luxury Hotels in the World</span></a>
+                    </div>
+                    <div class="blog-card-three__content">
+                        <div class="blog-card-three__content__inner">
+                            <ul class="list-unstyled blog-card-three__meta">
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-calendar-6"></i>March 08, 2024</a></li>
+                                <li><a asp-controller="Home" asp-action="About"> <i class="icon-bubble-chat"></i>2 Comment</a></li>
+                            </ul>
+                            <div class="blog-card-three__content__content">
+                                <h3 class="blog-card-three__title"><a asp-controller="Home" asp-action="About">Check the Top 6 luxury Hotels in the World</a></h3>
+                                <a asp-controller="Home" asp-action="About" class="blog-card-three__btn">
+                                    <span class="solinom-btn">Read more</span>
+                                    <i class="icon-right-arrow2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog section End -->
+<!-- Instagram section Start -->
+<section class="instagram-two">
+    <div class="container-fluid">
+        <ul class="instagram-two__list list-unstyled">
+            <li class="instagram-two__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                <div class="instagram-two__list__item__image">
+                    <img src="~/assets/images/instagram/instagram-1-1.png" alt="firdip image">
+                    <div class="instagram-two__list__item__image__hover">
+                        <a href="https://www.instagram.com/">
+                            <span class="icon-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="instagram-two__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='500ms'>
+                <div class="instagram-two__list__item__image">
+                    <img src="~/assets/images/instagram/instagram-1-2.png" alt="firdip image">
+                    <div class="instagram-two__list__item__image__hover">
+                        <a href="https://www.instagram.com/">
+                            <span class="icon-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="instagram-two__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='700ms'>
+                <div class="instagram-two__list__item__image">
+                    <img src="~/assets/images/instagram/instagram-1-3.png" alt="firdip image">
+                    <div class="instagram-two__list__item__image__hover">
+                        <a href="https://www.instagram.com/">
+                            <span class="icon-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="instagram-two__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='800ms'>
+                <div class="instagram-two__list__item__image">
+                    <img src="~/assets/images/instagram/instagram-1-4.png" alt="firdip image">
+                    <div class="instagram-two__list__item__image__hover">
+                        <a href="https://www.instagram.com/">
+                            <span class="fab fa-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="instagram-two__list__item wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='1000ms'>
+                <div class="instagram-two__list__item__image">
+                    <img src="~/assets/images/instagram/instagram-1-5.png" alt="firdip image">
+                    <div class="instagram-two__list__item__image__hover">
+                        <a href="https://www.instagram.com/">
+                            <span class="icon-instagram"></span>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="instagram-two__line"></div>
+</section>
+
+<div class="cta-two ">
+    <div class="cta-two__bg" style="background-image: url(~/assets/images/backgrounds/cta-bg-2-1.png);"></div>
+    <div class="container">
+        <div class="row gutter-y-30">
+            <div class="col-lg-6 col-xl-5">
+                <div class="cta-two__content wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                    <h4 class="cta-two__content__title">Check Our Exclusive Hotel Offer</h4>
+                    <div class="cta-two__content__btn">
+                        <a asp-controller="Home" asp-action="Contact" class="solinom-btn solinom-btn--base">book now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-7">
+                <div class="cta-two__funfact wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='500ms'>
+                    <div class="cta-two__thumb">
+                        <img src="~/assets/images/resources/cta-2-1.jpg" alt="solinom image">
+                    </div>
+                    <div class="cta-two__funfact__content count-box">
+                        <p class="cta-two__funfact__text">Up to</p>
+                        <h3 class="cta-two__funfact__count">
+                            <span class="cta-two__funfact__count__item count-text" data-stop="50" data-speed="1500"></span>
+                            <span>%</span>
+                        </h3>
+                        <p class="cta-two__funfact__text">offer</p>
+                        <div class="cta-two__funfact__element">
+                            <img src="~/assets/images/shapes/group-2-1.png" alt>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cta-two__element">
+        <img src="~/assets/images/shapes/cta-shape-2-1.png" alt>
+    </div>
+    <div class="cta-two__element-two">
+        <img src="~/assets/images/shapes/cta-shape-2-2.png" alt>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        document.getElementById('ViewRoomBtn').addEventListener('click', function () {
+            const roomId = document.getElementById('RoomSelection').value;
+            if (roomId) {
+                window.location.href = '/Home/Room1/' + roomId;
+            } else {
+                alert('Please select a room first');
+            }
+        });
+    </script>
+}

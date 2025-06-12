@@ -1,0 +1,98 @@
+﻿@model ProductUpdateVM
+@{
+    ViewData["Title"] = "Update Product";
+}
+
+@section style {
+    <style>
+        /* Your existing styles */
+    </style>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Update Product</h6>
+    </div>
+    <div class="card-body">
+        <form asp-area="Admin" asp-action="Update" asp-controller="Product" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Product Name -->
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+            <!-- Prices -->
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="CostPrice"></label>
+                    <input class="form-control" asp-for="CostPrice">
+                    <span class="text-danger" asp-validation-for="CostPrice"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="SellPrice"></label>
+                    <input class="form-control" asp-for="SellPrice">
+                    <span class="text-danger" asp-validation-for="SellPrice"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Discount"></label>
+                    <input class="form-control" asp-for="Discount">
+                    <span class="text-danger" asp-validation-for="Discount"></span>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label asp-for="Quantity"></label>
+                <input class="form-control" asp-for="Quantity">
+                <span class="text-danger" asp-validation-for="Quantity"></span>
+            </div>
+
+            <!-- Cover Image -->
+            <div class="form-group">
+                <div class="d-flex">
+                    <img width="80px" src="~/imgs/products/@Model.FileUrl" />
+                </div>
+                <label asp-for="File">Change Cover Image</label>
+                <input accept="image/*" class="form-control" asp-for="File">
+                <span class="text-danger" asp-validation-for="File"></span>
+            </div>
+
+            <!-- Additional Images -->
+            <div class="form-group">
+                <label>Current Additional Images (Check to Delete)</label>
+                <div class="d-flex flex-wrap" style="gap:10px">
+                    @foreach (var item in Model.OtherFilesUrls ?? [])
+                    {
+                        <div class="position-relative">
+                            <input type="checkbox"
+                                   name="ImagesToDelete"
+                                   value="@item"
+                                   id="img_@item"
+                                   class="d-none del-img-input" />
+                            <label class="del-img-label" for="img_@item">
+                                <img width="80px" src="~/imgs/products/@item" />
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <label asp-for="OtherFiles">Add More Images</label>
+                <input accept="image/*" class="form-control" asp-for="OtherFiles" multiple>
+                <span class="text-danger" asp-validation-for="OtherFiles"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary my-2">Update</button>
+        </form>
+    </div>
+</div>

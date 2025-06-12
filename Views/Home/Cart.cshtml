@@ -1,0 +1,129 @@
+﻿@model List<FinalProject.MVC.ViewModels.Baskets.BasketItemVM>
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<section class="cart-page py-5">
+    <div class="container">
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive mb-4">
+                <table class="table cart-page__table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            @* <th>Quantity</th> *@
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+
+                        {
+                            <tr>
+                                <td>
+                                    <div class="cart-page__table__meta d-flex align-items-center">
+                                        <div class="me-3">
+                                            <img src="~/imgs/products/@item.ImageUrl" alt="@item.Name" width="70" />
+                                        </div>
+                                        <h5 class="mb-0">@item.Name</h5>
+                                    </div>
+                                </td>
+                                <td>$@(item.SellPrice * (1 - item.Discount / 100.0m))</td>
+                                <td>$@(item.SellPrice * item.Count)</td>
+                                <td>
+                                    <a asp-controller="Home" asp-action="DeleteBasket" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <form method="post" asp-action="ApplyCoupon">
+                        <div class="input-group mb-3">
+                            <input type="text" name="coupon" class="form-control" placeholder="Enter coupon code" />
+                            <button class="btn btn-dark" type="submit">Apply Coupon</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 text-end">
+                    <ul class="list-unstyled mb-3">
+                        <li><strong>Subtotal:</strong> $@Model.Sum(x => x.SellPrice * x.Count)</li>
+                        <li><strong>Shipping:</strong> Free</li>
+                        <li><strong>Total:</strong> $@Model.Sum(x => x.SellPrice * x.Count)</li>
+                    </ul>
+                    <div>
+                        <a asp-controller="Home" asp-action="Checkout" class="btn btn-primary">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        else
+
+        {
+            <div class="text-center py-5">
+                <h4>Your cart is empty 🛒</h4>
+                <a asp-controller="Home" asp-action="Products" class="btn btn-primary mt-3">Continue Shopping</a>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            console.log("Document ready!"); // Debug log
+
+            // Plus button
+            $('.add').click(function () {
+                const productId = $(this).data('id');
+                const input = $(this).siblings('.quantity-input');
+                const currentVal = parseInt(input.val());
+                console.log(`Plus clicked: ID=${productId}, Current=${currentVal}`);
+
+                $.ajax({
+                    url: '/Cart/UpdateQuantity',
+                    type: 'POST',
+                    data: { productId: productId, quantity: currentVal + 1 },
+                    success: function (response) {
+                        console.log("AJAX success:", response);
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("AJAX error:", error);
+                    }
+                });
+            });
+
+            // Minus button
+            $('.sub').click(function () {
+                const productId = $(this).data('id');
+                const input = $(this).siblings('.quantity-input');
+                const currentVal = parseInt(input.val());
+                console.log(`Minus clicked: ID=${productId}, Current=${currentVal}`);
+
+                if (currentVal > 1) {
+                    $.ajax({
+                        url: '/Cart/UpdateQuantity',
+                        type: 'POST',
+                        data: { productId: productId, quantity: currentVal - 1 },
+                        success: function (response) {
+                            console.log("AJAX success:", response);
+                            location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("AJAX error:", error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

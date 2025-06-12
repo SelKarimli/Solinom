@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Reservation Success";
+}
+
+<div class="alert alert-success">
+    <h4>Reservation Submitted Successfully!</h4>
+    <p>Your reservation is now pending approval.</p>
+    <p>
+        <a asp-area="Admin" asp-controller="AdminReservation" asp-action="PendingReservations"
+           class="btn btn-primary">View Pending Reservations</a>
+        <a asp-controller="Rooms" asp-action="Index" class="btn btn-secondary">Back to Rooms</a>
+    </p>
+</div>

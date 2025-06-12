@@ -1,0 +1,81 @@
+﻿@model FinalProject.MVC.ViewModels.Baskets.ContactVM
+@{
+    ViewData["Title"] = "Contact";
+}
+<section class="page-header">
+    <div class="container">
+        <img src="~/assets/images/shapes/page-header-s-1.png" alt="Contact" class="page-header__shape">
+        <h2 class="page-header__title">Contact</h2>
+        <ul class="solinom-breadcrumb list-unstyled">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><span>Contact</span></li>
+        </ul>
+    </div>
+</section>
+
+<section class="contact-one">
+    <div class="container">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <div class="contact-one__inner">
+            <div class="row gutter-y-30">
+                <div class="col-lg-7">
+                    <form asp-action="Contact" method="post" class="contact-one__form form-one wow fadeInLeft">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="contact-one__form__top">
+                            <div class="sec-title text-start">
+                                <img src="~/assets/images/shapes/sec-title-s-1.png" alt="Contact with us" class="sec-title__img">
+                                <h6 class="sec-title__tagline bw-split-in-right">Contact with us</h6>
+                            </div>
+                        </div>
+
+                        <div class="form-one__group">
+                            <div class="form-one__control">
+                                <input type=text asp-for="Name" placeholder="Your Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-one__control">
+                                <input type=email asp-for="Email" placeholder="Email Address">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-one__control">
+                                <input type="tel" asp-for="Phone" placeholder="Phone Number">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            @* <div class="form-one__control">
+                                <input type=tel asp-for="Phone" placeholder="Phone">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div> *@
+                            <div class="form-one__control">
+                                <input type=text asp-for="Subject" placeholder="Subject">
+                                <span asp-validation-for="Subject" class="text-danger"></span>
+                            </div>
+                            <div class="form-one__control form-one__control--full">
+                                <textarea asp-for="Message" placeholder="Write a Message"></textarea>
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                            <div class="form-one__control">
+                                <button type="submit" class="solinom-btn solinom-btn--base">Send a Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Keep your existing contact information section -->
+                <div class="col-lg-5">
+
+
+                    <div class="contact-map">
+    <div class="container">
+        <div class="google-map google-map__contact">
+            <iframe title="template google map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4562.753041141002!2d-118.80123790098536!3d34.152323469614075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e82469c2162619%3A0xba03efb7998eef6d!2sCostco+Wholesale!5e0!3m2!1sbn!2sbd!4v1562518641290!5m2!1sbn!2sbd" class="map__contact" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+</section>

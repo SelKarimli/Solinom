@@ -1,0 +1,72 @@
+﻿@model List<FinalProject.MVC.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+}
+<section class="page-header">
+    <div class="container">
+        <img src="~/assets/images/shapes/page-header-s-1.png" alt="products grid" class="page-header__shape">
+        <h2 class="page-header__title">products grid</h2>
+        <ul class="solinom-breadcrumb list-unstyled">
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><span>products</span></li>
+        </ul>
+    </div>
+</section>
+
+<section class="product-one product-one--page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="product__info-top">
+                    <div class="product__showing-text-box">
+                        <p class="product__showing-text">Showing 1–9 of 12 Results</p>
+                    </div>
+                    <div class="product__showing-sort">
+                        <select class="selectpicker" aria-label="Sort by popular">
+                            <option selected>Sort by popular</option>
+                            <option value="1">Sort by view</option>
+                            <option value="2">Sort by price</option>
+                            <option value="3">Sort by ratings</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row gutter-y-30">
+                    <!-- /.col-md-6 col-lg-4 -->
+                    <div class="row gutter-y-30">
+                        @foreach (var product in Model)
+                        {
+                            <div class="col-md-6 col-lg-3">
+                                <div class="product__item wow fadeInUp" data-wow-duration="1500ms">
+                                    <div class="product__item__img">
+                                        <div class="product__item__img__item">
+                                            <img src="~/imgs/products/@product.CoverImage" alt="@product.Name" style="height: 250px; object-fit: cover;">
+                                        </div>
+                                        <div class="product__item__btn">
+                                            <a asp-controller="Home" asp-action="Cart"><i class="far fa-heart"></i></a>
+                                            <a asp-controller="Home" asp-action="Products"><i class="fas fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product__item__content">
+                                        <div class="product__item__ratings">
+                                            <span class="icon-star1"></span><span class="icon-star1"></span>
+                                            <span class="icon-star1"></span><span class="icon-star1"></span>
+                                            <span class="icon-star1"></span>
+                                        </div>
+                                        <h4 class="product__item__title">@product.Name</h4>
+                                        <div class="product__item__price">$@(product.SellPrice * (1 - product.Discount / 100.0m))</div>
+                                        <a asp-controller="Home" asp-action="AddBasket" asp-route-id="@product.Id"
+                                           class="solinom-btn product__item__link">
+                                            Add to Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div><!-- /.row -->
+            </div>
+        </div>
+    </div>
+</section>

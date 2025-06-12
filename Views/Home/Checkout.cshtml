@@ -1,0 +1,312 @@
+﻿@model List<FinalProject.MVC.ViewModels.Baskets.BasketItemVM>
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<section class="checkout-page py-5">
+    <div class="container">
+        <!-- Coupon Notice -->
+        <div class="alert alert-info mb-4">
+            Have a coupon? <a asp-controller="Account" asp-action="Login" class="text-primary">Click here to enter your code</a>
+        </div>
+
+        <div class="row g-4">
+            <!-- Billing Details Column -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <h3 class="h5 mb-0">Billing Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="billingForm" asp-controller="Home" asp-action="PaymentSuccessful" method="post">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="firstName" name="FirstName" placeholder="First Name" required>
+                                        <label for="firstName">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="lastName" name="LastName" placeholder="Last Name" required>
+                                        <label for="lastName">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email Address" required>
+                                        <label for="email">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" name="Phone" placeholder="Phone Number" required>
+                                        <label for="phone">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="company" name="Company" placeholder="Company (Optional)">
+                                        <label for="company">Company (Optional)</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="address" name="Address" placeholder="Street Address" required>
+                                        <label for="address">Street Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="address2" name="Address2" placeholder="Apartment, Suite, etc. (Optional)">
+                                        <label for="address2">Apartment, Suite, etc. (Optional)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="city" name="City" placeholder="City" required>
+                                        <label for="city">City</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="state" name="State" placeholder="State/Province" required>
+                                        <label for="state">State/Province</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="zip" name="ZipCode" placeholder="ZIP/Postal Code" required>
+                                        <label for="zip">ZIP/Postal Code</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="country" name="Country" required>
+                                            <option value="">Select Country</option>
+                                            <option value="US">United States</option>
+                                            <option value="CA">Canada</option>
+                                            <!-- Add more countries as needed -->
+                                        </select>
+                                        <label for="country">Country</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Shipping Address Toggle -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-light">
+                        <div class="form-check form-switch d-flex align-items-center">
+                            <input class="form-check-input me-2" type="checkbox" id="sameAsBilling" checked>
+                            <label class="form-check-label" for="sameAsBilling">Shipping address same as billing</label>
+                        </div>
+                    </div>
+                    <div class="card-body" id="shippingAddressSection" style="display: none;">
+                        <h4 class="h6 mb-3">Shipping Address</h4>
+                        <!-- Shipping address fields would go here -->
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h3 class="h5 mb-0">Additional Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Order notes (optional)" id="orderNotes" name="OrderNotes" style="height: 100px"></textarea>
+                            <label for="orderNotes">Order notes (optional)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Column -->
+            <div class="col-lg-6">
+                <div class="card shadow-sm sticky-top" style="top: 20px;">
+                    <div class="card-header bg-light">
+                        <h3 class="h5 mb-0">Your Order</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            @* <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th class="text-end">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model?.Any() == true)
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Name × @item.Count</td>
+                                                <td class="text-end">$@((item.SellPrice * item.Count).ToString("N2"))</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="2" class="text-center">Your basket is empty</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td class="text-end">$@Model.Sum(x => x.SellPrice * x.Count).ToString("N2")</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Shipping</th>
+                                        <td class="text-end">Free</td>
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>Total</th>
+                                        <td class="text-end fw-bold">$@Model.Sum(x => x.SellPrice * x.Count).ToString("N2")</td>
+                                    </tr>
+                                </tfoot>
+                            </table> *@
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th class="text-end">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model?.Any() == true)
+
+                                        {
+                                            @foreach (var item in Model)
+
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="me-3">
+                                                                <img src="~/imgs/products/@item.ImageUrl" alt="@item.Name" width="50" class="img-thumbnail">
+                                                            </div>
+                                                            <div>
+                                                                <div class="fw-bold">@item.Name</div>
+                                                                <div class="text-muted small">Quantity: @item.Count</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-end">$@((item.SellPrice * item.Count).ToString("N2"))</td>
+                                                </tr>
+                                            }
+                                        }
+
+                                        else
+
+                                        {
+                                            <tr>
+                                                <td colspan="2" class="text-center py-4">
+                                                    <div class="text-muted">Your basket is empty</div>
+                                                    <a asp-controller="Home" asp-action="Products" class="btn btn-sm btn-primary mt-2">
+                                                        Continue Shopping
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    @if (Model?.Any() == true)
+
+                                    {
+                                        <tfoot>
+                                            @{
+                                                decimal subtotal = Model.Sum(x => x.SellPrice * x.Count);
+                                            }
+                                            <tr>
+                                                <th>Subtotal</th>
+                                                <td class="text-end">$@subtotal.ToString("N2")</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping</th>
+                                                <td class="text-end">Free</td>
+                                            </tr>
+                                            <tr class="table-active">
+                                                <th>Total</th>
+                                                <td class="text-end fw-bold">$@subtotal.ToString("N2")</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-end pt-4">
+                                                    <a asp-controller="Home" asp-action="Cart" class="btn btn-outline-secondary me-2">
+                                                        <i class="fas fa-arrow-left me-1"></i> Back to Cart
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    }
+                                </table>
+                            </div>
+
+                        <!-- Payment Methods -->
+                        <div class="accordion mb-4" id="paymentMethods">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankTransfer">
+                                        Direct Bank Transfer
+                                    </button>
+                                </h2>
+                                <div id="bankTransfer" class="accordion-collapse collapse show" data-bs-parent="#paymentMethods">
+                                    <div class="accordion-body">
+                                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cashOnDelivery">
+                                        Cash on Delivery
+                                    </button>
+                                </h2>
+                                <div id="cashOnDelivery" class="accordion-collapse collapse" data-bs-parent="#paymentMethods">
+                                    <div class="accordion-body">
+                                        <p>Pay with cash upon delivery.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Place Order -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                            <label class="form-check-label" for="termsCheck">
+                                I agree to the <a href="#">terms and conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit" form="billingForm" class="btn btn-primary w-100 py-3">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Toggle shipping address visibility
+        document.getElementById('sameAsBilling').addEventListener('change', function() {
+            const shippingSection = document.getElementById('shippingAddressSection');
+            shippingSection.style.display = this.checked ? 'none' : 'block';
+        });
+
+        // Form validation
+        document.getElementById('billingForm').addEventListener('submit', function(e) {
+            if (!document.getElementById('termsCheck').checked) {
+                e.preventDefault();
+                alert('Please agree to the terms and conditions');
+            }
+        });
+    </script>
+}

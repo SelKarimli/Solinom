@@ -1,0 +1,174 @@
+:root {
+  --solinom-text: #6e6b70;
+  --solinom-text-rgb: 110, 107, 112;
+  --solinom-white: #141215;
+  --solinom-white-rgb: 20, 18, 21;
+  --solinom-base: #c2a74e;
+  --solinom-base-rgb: 194, 167, 78;
+  --solinom-black: #fff;
+  --solinom-black-rgb: 255, 255, 255;
+  --solinom-black3: #000;
+  --solinom-black3-rgb: 0, 0, 0;
+  --solinom-black4: #121013;
+  --solinom-black4-rgb: 18, 16, 19;
+  --solinom-gray: #1c1a1d;
+  --solinom-gray-rgb: 28, 26, 29;
+  --solinom-border-color: #2f2d30;
+  --solinom-border-color-rgb: 47, 45, 48;
+}
+
+.main-slider-one__bg::after {
+  background-image: url(../images/shapes/hero-slider-1-1-dark.png);
+}
+
+.contact-map,
+.opening,
+.blog-one,
+.instagram-one,
+.why-choose-one,
+.testimonials-one,
+.about-one {
+  background-color: var(--solinom-white);
+}
+
+.footer-widget__newsletter button[type=submit]:hover,
+.footer-widget__social a:hover,
+.footer-widget__social a,
+.footer-widget__info li a:hover,
+.footer-widget__links li a:hover,
+.footer-widget__title,
+.cta-two__sub-title,
+.cta-two__title,
+.opening__info,
+.opening__title,
+.opening__icon,
+.blog-card__date,
+.contact__input-box i,
+.contact__input-box .bootstrap-select > .dropdown-toggle::before,
+.contact .sec-title__title,
+.funfact-one__count,
+.funfact-one__text,
+.funfact-one__icon,
+.instagram-one a::before,
+.why-choose-one__list__icon,
+.service-one__item:hover .service-one__item__title,
+.video-two__btn .video-popup,
+.video-two__btn .curved-circle--item span,
+.video-two__title,
+.client-carousel-one .owl-theme .owl-nav button:hover,
+.about-one__image__info__icon,
+.feature-one__item__icon,
+.main-slider-one__title,
+.main-slider-one__sub-title {
+  color: var(--solinom-black);
+}
+
+.main-slider-one__bg::before {
+  background-color: var(--solinom-gray);
+  opacity: 0.5;
+}
+
+.about-one__image__info,
+.background-black,
+.cta-two__content .solinom-btn::before,
+.blog-card__content,
+.about-one__content__list li {
+  background-color: var(--solinom-gray);
+}
+
+.main-slider-one__carousel.owl-carousel .owl-nav button {
+  background-color: rgba(var(--solinom-black-rgb), 0.1);
+  color: var(--solinom-black);
+}
+
+.main-slider-one circle {
+  stroke: var(--solinom-white);
+}
+
+.main-slider-one__carousel .owl-dots .owl-dot span {
+  border-color: var(--solinom-black);
+}
+
+.cta-two__content .solinom-btn,
+.cta-two__content .solinom-btn::after,
+.blog-card__image__link::before,
+.blog-card__image__link::after,
+.funfact-one__item:not(:first-of-type)::before,
+.main-slider-one__carousel .owl-dots .owl-dot:hover span,
+.main-slider-one__carousel .owl-dots .owl-dot.active span {
+  background-color: var(--solinom-black);
+}
+
+.about-one__flower {
+  background-color: var(--solinom-black4);
+}
+
+.about-one__image__info::after {
+  border-image: linear-gradient(-45deg, rgba(var(--solinom-base-rgb), 1) 0%, rgba(var(--solinom-black3-rgb), 1) 100%) 1;
+}
+
+.client-carousel-one .client-carousel__one__item:hover {
+  background-color: var(--solinom-gray);
+}
+
+.contact,
+.contact__bg,
+.video-two__bg,
+.video-two {
+  background-color: var(--solinom-black3);
+}
+
+.instagram-one a::after {
+  background-color: rgba(var(--solinom-black3-rgb), 0.5);
+}
+
+.contact__input-box textarea,
+.contact__input-box input[type=date],
+.contact__input-box input[type=text],
+.contact__input-box input[type=email] {
+  color: var(--solinom-black);
+  border-color: rgba(var(--solinom-black-rgb, 255, 255, 255), 0.15);
+}
+
+.contact__input-box .bootstrap-select > .dropdown-toggle {
+  color: var(--solinom-black) !important;
+}
+
+.contact__input-box .bootstrap-select > .dropdown-toggle {
+  border-color: rgba(var(--solinom-black-rgb, 255, 255, 255), 0.15);
+}
+
+.contact__input-box .bootstrap-select .dropdown-menu > li:hover > a,
+.contact__input-box .bootstrap-select .dropdown-menu > li.selected > a {
+  color: var(--solinom-black);
+}
+
+.blog-card__image__link {
+  background-color: rgba(var(--solinom-gray-rgb), 0.5);
+}
+
+.opening__info--last {
+  border-color: rgba(var(--solinom-black-rgb), 0.2);
+}
+
+.main-footer__bottom__inner {
+  border-color: rgba(var(--solinom-black-rgb), 0.2);
+}
+
+.google-map iframe {
+  filter: grayscale(100%) invert(92%) contrast(83%);
+}
+
+.cta-two__thumb__two__thumb,
+.cta-two__thumb__one__thumb {
+  border-color: var(--solinom-black);
+}
+
+.cta-two__content .solinom-btn:hover {
+  color: var(--solinom-white);
+}
+
+.footer-widget__newsletter input[type=text]:focus {
+  color: var(--solinom-text);
+}
+/*# sourceMappingURL=solinom-dark.css.map */

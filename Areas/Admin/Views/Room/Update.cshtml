@@ -1,0 +1,90 @@
+﻿@model RoomUpdateVM
+@{
+    ViewData["Title"] = "Update Rooms";
+}
+
+@section style {
+    <style>
+        /* Your existing styles */
+    </style>
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Update Room</h6>
+    </div>
+    <div class="card-body">
+        <form asp-area="Admin" asp-action="Update" asp-controller="Room" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomNumber"></label>
+                <textarea class="form-control" asp-for="RoomNumber"></textarea>
+                <span class="text-danger" asp-validation-for="RoomNumber"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="CoverImageFile">Cover image</label>
+                    <input accept="image/*" class="form-control" asp-for="CoverImageFile">
+                    <span class="text-danger" asp-validation-for="CoverImageFile"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="AdditionalImages">Additional images</label>
+                    <input accept="image/*" class="form-control" asp-for="AdditionalImages">
+                    <span class="text-danger" asp-validation-for="AdditionalImages"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Capacity"></label>
+                    <input class="form-control" asp-for="Capacity">
+                    <span class="text-danger" asp-validation-for="Capacity"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Price"></label>
+                    <input class="form-control" asp-for="Price">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group form-check">
+                    <input asp-for="IsAvailable" class="form-check-input" />
+                    <label asp-for="IsAvailable" class="form-check-label"></label>
+                </div>
+            </div>
+            <!-- Additional Images -->
+            <div class="form-group">
+                <label>Current Additional Images (Check to Delete)</label>
+                <div class="d-flex flex-wrap" style="gap:10px">
+                    @foreach (var item in Model.OtherFilesUrls ?? [])
+                    {
+                        <div class="position-relative">
+                            <input type="checkbox"
+                                   name="ImagesToDelete"
+                                   value="@item"
+                                   id="img_@item"
+                                   class="d-none del-img-input" />
+                            <label class="del-img-label" for="img_@item">
+                                <img width="80px" src="~/imgs/rooms/@item" />
+                            </label>
+                        </div>
+                    }
+                </div>
+
+                <label asp-for="AdditionalImages">Add More Images</label>
+                <input accept="image/*" class="form-control" asp-for="AdditionalImages" multiple>
+                <span class="text-danger" asp-validation-for="AdditionalImages"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary my-2">Update</button>
+        </form>
+    </div>
+</div>

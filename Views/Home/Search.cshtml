@@ -1,0 +1,80 @@
+﻿@model FinalProject.MVC.ViewModels.SearchViewModel;
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="container mt-5">
+    <h1>Search Results</h1>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-info">@ViewBag.Message</div>
+    }
+
+    @if (Model.Rooms.Any())
+    {
+        <div class="section mb-5">
+            <h2 class="section-title">Rooms</h2>
+            <div class="row">
+                @foreach (var room in Model.Rooms)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card room-card">
+                            <img src="@room.ImageUrl" class="card-img-top" alt="@room.Name">
+                            <div class="card-body">
+                                <h5 class="card-title">@room.Name</h5>
+                                <p class="card-text">@room.Description</p>
+                                <a href="/rooms/@room.Id" class="btn btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (Model.Tables.Any())
+    {
+        <div class="section mb-5">
+            <h2 class="section-title">Restaurant Tables</h2>
+            <div class="row">
+                @foreach (var table in Model.Tables)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card table-card">
+                            <div class="card-body">
+                                <h5 class="card-title">@table.Title</h5>
+                                <p class="card-text">Seats: @table.Seat</p>
+                                @* <p class="card-text">@table.Description</p>
+                                 *@<a href="/restaurant/reserve?tableId=@table.Id" class="btn btn-primary">Reserve</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (Model.Products.Any())
+    {
+        <div class="section mb-5">
+            <h2 class="section-title">Shop Products</h2>
+            <div class="row">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card product-card">
+                            <img src="@product.CoverImage" class="card-img-top" alt="@product.Name">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">$@product.SellPrice.ToString("0.00")</p>
+                                <a href="/shop/product/@product.Id" class="btn btn-primary">View Product</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

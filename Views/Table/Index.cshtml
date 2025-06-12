@@ -1,0 +1,139 @@
+﻿@model IEnumerable<FinalProject.MVC.Models.Table>
+@{
+    ViewData["Title"] = "Available Tables";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    @* <!-- Filter/Sort Row -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-text">Filter</span>
+                <select class="form-select" id="seatFilter">
+                    <option value="0">All Seats</option>
+                    <option value="2">2 Seats</option>
+                    <option value="4">4 Seats</option>
+                    <option value="6">6+ Seats</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-text">Sort</span>
+                <select class="form-select" id="sortOption">
+                    <option value="seat-asc">Seats (Low to High)</option>
+                    <option value="seat-desc">Seats (High to Low)</option>
+                    <option value="title-asc">Title (A-Z)</option>
+                    <option value="title-desc">Title (Z-A)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+ *@
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No tables available at the moment.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var table in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100" aria-labelledby="table-@table.Id-title">
+                        <div class="card-body">
+                            <h3 class="card-title" id="table-@table.Id-title">@table.Title</h3>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-chair me-2"></i> Seats: @table.Seat</span>
+                            </div>
+                            <p class="card-text">Table for your family and friends</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge @(table.Reserved ? "bg-danger" : "bg-success")">
+                                    @(table.Reserved ? "Reserved" : "Available")
+                                </span>
+                                <small class="text-muted">ID: @table.Id</small>
+                            </div>
+                        </div>
+                        @if (!table.Reserved)
+                        {
+                            <div class="card-footer bg-transparent">
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                                        data-bs-target="#reservationModal" data-table-id="@table.Id">
+                                    Reserve ($20 deposit)
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (ViewBag.TotalPages > 1)
+        {
+            <nav aria-label="Table pagination">
+                <ul class="pagination justify-content-center mt-4">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="?page=@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>
+
+<!-- Reservation Modal -->
+<div class="modal fade" id="reservationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reserve Table</h5>
+                <button type="button" class="btn-close" data-bs-close="modal"></button>
+            </div>
+            <form asp-action="Reserve" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="tableId" id="modalTableId">
+                    <div class="mb-3">
+                        <label for="reservationDate" class="form-label">Reservation Date</label>
+                        <input type="datetime-local" class="form-control" id="reservationDate"
+                               name="reservationDate" required min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal handling
+            var modal = document.getElementById('reservationModal');
+            modal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var tableId = button.getAttribute('data-table-id');
+                var modalInput = modal.querySelector('#modalTableId');
+                modalInput.value = tableId;
+            });
+
+            // Filter/Sort functionality
+            document.getElementById('seatFilter').addEventListener('change', applyFilters);
+            document.getElementById('sortOption').addEventListener('change', applyFilters);
+
+            function applyFilters() {
+                // Implement client-side filtering/sorting or make AJAX call
+                console.log('Filters changed - implement filtering logic');
+            }
+        });
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@model FinalProject.MVC.ViewModels.RoomCreateVM
+@{
+    ViewData["Title"] = "Create Room";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Room create</h6>
+    </div>
+    <div class="card-body">
+        <form enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomNumber"></label>
+                <textarea class="form-control" asp-for="RoomNumber"></textarea>
+                <span class="text-danger" asp-validation-for="RoomNumber"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea class="form-control" asp-for="Description"></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="CoverImageFile">Cover image</label>
+                    <input accept="image/*" class="form-control" asp-for="CoverImageFile">
+                    <span class="text-danger" asp-validation-for="CoverImageFile"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="AdditionalImages">Additional images</label>
+                    <input accept="image/*" multiple class="form-control" asp-for="AdditionalImages">
+                    <span class="text-danger" asp-validation-for="AdditionalImages"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label asp-for="Capacity"></label>
+                    <input class="form-control" asp-for="Capacity">
+                    <span class="text-danger" asp-validation-for="Capacity"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Price"></label>
+                    <input class="form-control" asp-for="Price">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="col">
+                    <!-- Moved checkbox into form-row -->
+                    <div class="form-group form-check">
+                        <input asp-for="IsAvailable" class="form-check-input" />
+                        <label asp-for="IsAvailable" class="form-check-label"></label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary my-2">Submit</button>
+        </form>
+    </div>
+</div>

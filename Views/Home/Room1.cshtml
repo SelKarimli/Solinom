@@ -1,0 +1,151 @@
+﻿@model FinalProject.MVC.ViewModels.ReservationCreateVM
+@{
+    ViewData["Title"] = "Room Reservation";
+    var room = ViewData["Room"] as FinalProject.MVC.Models.Room;
+
+    // Safe navigation with fallback values
+    var roomImage = room.CoverImage;
+    var roomDescription = room.Description;
+    var roomName = room?.Name ?? "Room";
+    var roomPrice = room?.Price ?? 100;
+    var roomCapacity = room?.Capacity ?? 10;
+    var roomNumber = room?.RoomNumber ?? "000";
+}
+<div class="container-fluid room-details-container">
+    <div class="row">
+        <!-- Left Column - Room Details -->
+        <div class="col-lg-8 room-gallery">
+            <div class="room-main-image mb-4">
+                <img src="~/imgs/rooms/@roomImage" alt="@roomName" class="img-fluid rounded">
+            </div>
+
+            <h1 class="room-title">@roomName</h1>
+            <div class="room-meta mb-4">
+                <span class="badge bg-primary me-2">Room @roomNumber</span>
+                <span class="text-muted"><i class="fas fa-user-friends me-1"></i> @roomCapacity guests</span>
+            </div>
+
+            <div class="room-description">
+                <h3>About This Room</h3>
+                <p>@roomDescription</p>
+            </div>
+
+            <div class="room-amenities mt-4">
+                <h3>Amenities</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-wifi me-2"></i> Free WiFi</li>
+                            <li><i class="fas fa-tv me-2"></i> Flat-screen TV</li>
+                            <li><i class="fas fa-snowflake me-2"></i> Air conditioning</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-coffee me-2"></i> Coffee maker</li>
+                            <li><i class="fas fa-shower me-2"></i> Private bathroom</li>
+                            <li><i class="fas fa-lock me-2"></i> Safe deposit box</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @foreach (var image in room.Images)
+            {
+                <div class="thumbnail" onclick="changeMainImage('@image')">
+                    <img src="~/imgs/rooms/@image" alt="@roomName" class="img-thumbnail">
+                </div>
+            }
+        </div>
+
+        <!-- Right Column - Reservation Form -->
+        <div class="col-lg-4 reservation-sidebar">
+            <div class="sticky-top pt-3">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Reserve @roomName</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="price-display mb-3">
+                            <span class="price">$@roomPrice.ToString("0.00")</span>
+                            <span class="text-muted">per night</span>
+                        </div>
+
+                        <div class="room-details mb-4">
+                            <p><strong>Room Number:</strong> @roomNumber</p>
+                            <p><strong>Price:</strong> $@roomPrice.ToString("0.00") per night</p>
+                            <p><strong>Capacity:</strong> @roomCapacity guests</p>
+                        </div></div>
+                        <form asp-controller="Reservation" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="RoomId" />
+
+                            <div class="mb-3">
+                                <label asp-for="CheckInDate" class="form-label">Check-In Date</label>
+                                <input asp-for="CheckInDate" type="date" class="form-control" required
+                                       min="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="CheckInDate" class="text-danger small"></span>
+                            </div>
+
+        <div class="mb-3">
+            <label asp-for="CheckOutDate">Check-Out Date</label>
+            <input asp-for="CheckOutDate" type="date" class="form-control" required
+                   min="@DateTime.Today.AddDays(1).ToString("yyyy-MM-dd")">
+            <span asp-validation-for="CheckOutDate" class="text-danger small"></span>
+        </div>
+
+                            <div class="mb-3">
+                                <label asp-for="NumberOfGuests" class="form-label">Guests</label>
+                                <input asp-for="NumberOfGuests" type="number" class="form-control"
+                                       min="1" max="@roomCapacity" value="1">
+                                <span asp-validation-for="NumberOfGuests" class="text-danger small"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="SpecialRequests" class="form-label">Special Requests</label>
+                                <textarea asp-for="SpecialRequests" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="total-price mb-3 p-2 bg-light rounded">
+                                <strong>Total:</strong>
+                                <span id="totalPrice" class="float-end">@room.Price</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <i class="fas fa-calendar-check me-2"></i>Confirm Reservation
+                            </button>
+    </form>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@section Scripts {
+    <script>
+        document.getElementById('CheckInDate').addEventListener('change', function () {
+            const checkInDate = new Date(this.value);
+            const checkOutDate = new Date(checkInDate);
+            checkOutDate.setDate(checkOutDate.getDate() + 1);
+
+            document.getElementById('CheckOutDate').min = checkOutDate.toISOString().split('T')[0];
+
+            if (new Date(document.getElementById('CheckOutDate').value) < checkOutDate) {
+                document.getElementById('CheckOutDate').value = checkOutDate.toISOString().split('T')[0];
+            }
+        });
+
+        // Calculate and display total price
+        function calculateTotal() {
+            const checkIn = new Date(document.getElementById('CheckInDate').value);
+            const checkOut = new Date(document.getElementById('CheckOutDate').value);
+            const pricePerNight = @roomPrice;
+
+            if (checkIn && checkOut) {
+                const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+                const total = nights * pricePerNight;
+                document.getElementById('totalPrice').textContent = '$' + total.toFixed(2);
+            }
+        }
+
+        document.getElementById('CheckInDate').addEventListener('change', calculateTotal);
+        document.getElementById('CheckOutDate').addEventListener('change', calculateTotal);
+    </script>
+}

@@ -1,0 +1,474 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="bracket-web">
+    <meta name="description" content="Solinom — Luxury Hotel Template is perfect if you like a clean, modern and creative template. It’s not WordPress theme. This template is ideal for hotel, hostel, resort, beach, boutique, campground, countryside, mountain, summer resort, apartments, restaurant, pub, spa wellness, wedding center, hotel B&B, vacation room/apartment rental etc, and those who need an easy, attractive and effective way to share their work with clients. If you would like to create a page that has a strong first impression and intrigues everyone, Solinom template is the tool you need. Let it impress you with the live preview page. It’s super easy to customize so it’ll suit your needs.">
+    <title>Solinom Final Project</title>
+
+    <!-- favicons Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="~/assets/vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/animate/animate.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/vendors/jarallax/jarallax.css">
+    <link rel="stylesheet" href="~/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/vendors/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/nouislider/nouislider.pips.css">
+    <link rel="stylesheet" href="~/assets/vendors/tiny-slider/tiny-slider.css">
+    <link rel="stylesheet" href="~/assets/vendors/solinom-icons/style.css">
+    <link rel="stylesheet" href="~/assets/vendors/owl-carousel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/owl-carousel/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/vendors/slick-carousel/slick.css">
+    <link rel="stylesheet" href="~/assets/vendors/flipster/flipster.css">
+    <style>
+        .search-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+            .search-popup.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .search-popup__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+        }
+
+        .search-popup__content {
+            position: absolute;
+            width: 100%;
+            max-width: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input-group {
+            display: flex;
+            position: relative;
+        }
+
+        #global-search {
+            flex: 1;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-type-selector select {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+            appearance: none;
+            background: #f8f8f8;
+            cursor: pointer;
+        }
+
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .search-suggestion-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .search-suggestion-item:hover {
+                background: #f5f5f5;
+            }
+
+        .solinom-btn--base {
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/solinom.css">
+</head>
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+    <div class="preloader">
+        <div class="preloader__image" style="background-image: url(assets/images/loader.png);"></div>
+    </div>
+    <!-- /.preloader -->
+    <div class="page-wrapper">
+        <!-- Top Bar Three -->
+        <div class="topbar-three topbar-three--one">
+            <div class="container-fluid">
+                <div class="topbar-three__inner">
+                    <div class="topbar-three__inner__left">
+                        <ul class="list-unstyled topbar-three__info">
+                            <li class="topbar-three__info__item">
+                                <div class="topbar-three__info__icon">
+                                    <i class="icon-pin"></i>
+                                </div>
+                                <p class="topbar-three__info__location">Code Academy, Baku, Azerbaijan</p>
+                            </li>
+                            <li class="topbar-three__info__item">
+                                <div class="topbar-three__info__icon">
+                                    <i class="icon-envelope"></i>
+                                </div>
+                                <a href="mailto:fatimaor@code.edu.az" class="topbar-three__info__contact">fatimaor@code.edu.az</a>
+                            </li>
+                            
+                            <li class="topbar-three__info__item">
+                                <div class="topbar-three__info__icon">
+                                    <i class="icon-call"></i>
+                                </div>
+                                <a href="tel:+994103147675" class="topbar-three__info__contact">+994103147675</a>
+                            </li>
+                            @if (User.Identity?.IsAuthenticated == true)
+
+                            {
+                                <li class="nav-item">
+                                    <div class="topbar-three__info__icon">
+                                        <form asp-controller="Account" asp-action="Logout" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                                        </form>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="topbar-three__inner__right">
+                        <ul class="list-unstyled topbar-three__item">
+                            <li><a asp-controller="Home" asp-action="About" class="topbar-three__item__text">Explore Solinom</a></li>
+                            <li><a asp-controller="Home" asp-action="About" class="topbar-three__item__text">About</a></li>
+                        </ul>
+                        <div class="topbar-three__social">
+                            <a href="https://facebook.com"> <i class="icon-facebook-f" aria-hidden="true"></i> <span class="sr-only">Facebook</span></a>
+                            <a href="https://twitter.com"> <i class="icon-x-twitter" aria-hidden="true"></i> <span class="sr-only">Twitter</span></a>
+                            <a href="https://pinterest.com"> <i class="icon-pinterest-p" aria-hidden="true"></i> <span class="sr-only">Pinterest</span></a>
+                            <a href="https://youtube.com"> <i class="icon-youtube" aria-hidden="true"></i> <span class="sr-only">youtube</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <header class="main-header sticky-header main-header--one sticky-header--normal">
+            <div class="container">
+                <div class="main-header__logo">
+                    <a asp-controller="Home" asp-action="Index">
+                        <img src="~/assets/images/logo-light.png" alt="Solinom HTML" width="110" height="90">
+                    </a>
+                </div>
+                <div class="main-header__inner">
+                    <div class="main-header__left">
+                        <div class="main-header__info">
+                            <a asp-controller="Home" asp-action="Cart" class="main-header__info__item"> <i class="icon-trolley-cart_4175270" aria-hidden="true"></i> <span class="sr-only">Cart</span> </a>
+                            <div class="search-overlay" id="searchOverlay">
+                                <div class="search-container">
+                                    <form action="/search" method="get">
+                                        <input type="text" placeholder="Search rooms, amenities, services..." name="q">
+                                        <button type="submit"><i class="fas fa-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="main-header__nav main-menu">
+                        <ul class="main-menu__list">
+
+                            <li class="dropdown megamenu">
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+                          <li>
+                                <a asp-controller="Home" asp-action="About">About</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Rooms">Rooms</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Products">Shop</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Cart">Cart</a>
+                            </li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Gallery">Gallery</a>
+                            </li> 
+                            <li>
+                                <a asp-controller="Home" asp-action="Restaurant">Restaurant</a>
+                            </li>
+                            <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                            <li>
+                                <a asp-controller="Home" asp-action="Contact">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="main-header__right">
+                        <a asp-controller="Home" asp-action="Contact" class="solinom-btn main-header__btn">Book Hotel</a>
+                        <div class="mobile-nav__btn mobile-nav__toggler">
+                            @* <span></span>
+                            <span></span>
+                            <span></span> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- main-slider-end -->
+            @RenderBody()
+        <footer class="main-footer ">
+            <div class="main-footer__top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 col-xl-5 wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='300ms'>
+                            <div class="footer-widget footer-widget--about">
+                                <h2 class="footer-widget__title">About</h2>
+                                <p class="footer-widget__text">There are many variations passages of Lorem Ipsum available, but the majority have suffered alteration </p>
+                                <form action="#" data-url="MAILCHIMP_FORM_URL" class="footer-widget__newsletter mc-form">
+                                    <input type="text" name="EMAIL" placeholder="Email Address">
+                                    <button type="submit" class="fas fa-paper-plane"> <span class="sr-only">submit</span></button>
+                                </form>
+                                <div class="mc-form__response"></div>
+                                <div class="footer-widget__social">
+                                    <a href="https://facebook.com"> <i class="icon-facebook-f" aria-hidden="true"></i> <span class="sr-only">Facebook</span></a>
+                                    <a href="https://twitter.com"> <i class="icon-x-twitter" aria-hidden="true"></i> <span class="sr-only">Twitter</span></a>
+                                    <a href="https://pinterest.com"> <i class="icon-pinterest-p" aria-hidden="true"></i> <span class="sr-only">Pinterest</span></a>
+                                    <a href="https://youtube.com"> <i class="icon-youtube" aria-hidden="true"></i> <span class="sr-only">youtube</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='400ms'>
+                            <div class="footer-widget footer-widget--links">
+                                <h2 class="footer-widget__title">Links</h2>
+                                <ul class="list-unstyled footer-widget__links">
+                                    <li><i class="fas fa-circle"></i><a asp-controller="Home" asp-action="Room1">Hotel Room</a></li>
+                                    <li><i class="fas fa-circle"></i><a asp-controller="Home" asp-action="Restaurant">Restaurant</a></li>
+                                    @* <li><i class="fas fa-circle"></i><a href="faq.html">Privacy Policy</a></li> *@
+                                    <li><i class="fas fa-circle"></i><a asp-controller="Home" asp-action="About">About Us</a></li>
+                                    <li><i class="fas fa-circle"></i><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-4 wow fadeInUp" data-wow-duration='1500ms' data-wow-delay='700ms'>
+                            <div class="footer-widget footer-widget--contact">
+                                <h2 class="footer-widget__title">Contact</h2>
+                                <ul class="list-unstyled footer-widget__info">
+                                    <li>
+                                        <div class="footer-widget__info__item">
+                                            <i class="icon-pin"></i>
+                                        </div>
+                                        <a class="footer-widget__info__text" href="https://www.google.com/maps">Code Academy<br> Baku, Azerbaijan</a>
+                                    </li>
+                                    <li>
+                                        <div class="footer-widget__info__item">
+                                            <i class="icon-telephone-call"></i>
+                                        </div>
+                                        <a class="footer-widget__info__text" href="tel:+994103147675">+994103147675</a>
+                                    </li>
+                                    <li>
+                                        <div class="footer-widget__info__item">
+                                            <i class="icon-envelope"></i>
+                                        </div>
+                                        <a class="footer-widget__info__text" href="mailto:fatimaor@code.edu.az">fatimaor@code.edu.az</a>
+                                    </li>
+                                </ul>
+                                <div class="footer-widget__app">
+                                    <a href="https://www.apple.com/app-store/" class="footer-widget__app__item">
+                                        <img src="~/assets/images/shapes/app-store-1-1.png" alt="app item">
+                                    </a>
+                                    <a href="https://play.google.com/store/apps?hl=en_US" class="footer-widget__app__item">
+                                        <img src="~/assets/images/shapes/app-store-1-2.png" alt="app item">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-footer__top__shape">
+                    <img src="~/assets/images/shapes/home-footer.png">
+                </div>
+            </div>
+            <div class="main-footer__bottom">
+                <div class="container">
+                    <div class="main-footer__bottom__inner">
+                        <p class="main-footer__copyright">
+                            &copy; Copyright <span class="dynamic-year"></span> by Solinom HTML Template.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+            <div class="logo-box">
+                <a asp-controller="Home" asp-action="Index" aria-label="logo image"><img src="~/assets/images/logo-light.png" width="130" alt=" solinom logo"></a>
+            </div>
+            <div class="mobile-nav__container"></div>
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <i class="fa fa-envelope"></i>
+                    <a href="mailto:fatimaor@code.edu.az">fatimaor@code.edu.az</a>
+                </li>
+                <li>
+                    <i class="fa fa-phone-alt"></i>
+                    <a href="tel:+994103147675">+994 10 314 76 75</a>
+                </li>
+            </ul>
+            <div class="mobile-nav__social">
+                <a href="https://facebook.com"> <i class="icon-facebook-f" aria-hidden="true"></i> <span class="sr-only">Facebook</span></a>
+                <a href="https://twitter.com"> <i class="icon-x-twitter" aria-hidden="true"></i> <span class="sr-only">Twitter</span></a>
+                <a href="https://pinterest.com"> <i class="icon-pinterest-p" aria-hidden="true"></i> <span class="sr-only">Pinterest</span></a>
+                <a href="https://youtube.com"> <i class="icon-youtube" aria-hidden="true"></i> <span class="sr-only">youtube</span></a>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+    <li class="nav-item dropdown no-arrow d-sm-none">
+    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-search fa-fw"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+         aria-labelledby="searchDropdown">
+        <form class="form-inline mr-auto w-100 navbar-search" action="/Search" method="get">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control bg-light border-0 small"
+                       placeholder="Search rooms, tables, products..." 
+                       aria-label="Search"
+                       id="mobileSearchInput" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</li>
+
+    <!-- /.search-popup -->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
+        <span class="scroll-to-top__text">back top</span>
+        <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/vendors/jquery/jquery-3.7.0.min.js"></script>
+    <!-- <script src="assets/vendors/jquery/jquery-migrate.min.js"></script> -->
+    <script src="~/assets/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <script src="~/assets/vendors/jarallax/jarallax.min.js"></script>
+    <script src="~/assets/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="~/assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="~/assets/vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="~/assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+        
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="~/assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/vendors/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/assets/vendors/nouislider/nouislider.min.js"></script>
+    <script src="~/assets/vendors/tiny-slider/tiny-slider.js"></script>
+    <script src="~/assets/vendors/wnumb/wNumb.min.js"></script>
+    <script src="~/assets/vendors/owl-carousel/js/owl.carousel.min.js"></script>
+    <script src="~/assets/vendors/slick-carousel/slick.min.js"></script>
+    <script src="~/assets/vendors/flipster/flipster.js"></script>
+    <script src="~/assets/vendors/wow/wow.js"></script>
+    <script src="~/assets/vendors/imagesloaded/imagesloaded.min.js"></script>
+    <script src="~/assets/vendors/isotope/isotope.js"></script>
+    <script src="~/assets/vendors/countdown/countdown.min.js"></script>
+    <script src="~/assets/vendors/jquery-circleType/jquery.circleType.js"></script>
+    <script src="~/assets/vendors/jquery-lettering/jquery.lettering.min.js"></script>
+
+    <!-- GSAP Animation -->
+    <script src="~/assets/vendors/gsap/gsap.js"></script>
+    <script src="~/assets/vendors/gsap/ScrollTrigger.min.js"></script>
+    <script src="~/assets/vendors/gsap/splittext.min.js"></script>
+    <script src="~/assets/js/solinom-gsap.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize dropdown
+            $('#searchDropdown').on('click', function (e) {
+                e.preventDefault();
+                $(this).dropdown('toggle');
+            });
+
+            // Focus input when dropdown opens
+            $('#searchDropdown').on('shown.bs.dropdown', function () {
+                $('#mobileSearchInput').focus();
+            });
+
+            // Close dropdown when clicking outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.navbar-search, #searchDropdown').length) {
+                    $('#searchDropdown').dropdown('hide');
+                }
+            });
+
+            // Prevent empty form submission
+            $('.navbar-search').on('submit', function (e) {
+                if ($('#mobileSearchInput').val().trim() === '') {
+                    e.preventDefault();
+                    $('#mobileSearchInput').focus();
+                }
+            });
+        });
+    </script>
+    <!-- template js -->
+    <script src="~/assets/js/solinom.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

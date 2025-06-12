@@ -1,0 +1,54 @@
+﻿@using FinalProject.MVC.ViewModels
+@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+        <a class="btn btn-primary" asp-action="Create">Yarat</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Cost price</th>
+                        <th>Sell price</th>
+                        <th>Discount</th>
+                        <th>Stock count</th>
+                        <th colspan="2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><img src="~/imgs/products/@item.CoverImage" width="70" /></td>
+                            <td>@item.Name</td>
+                            <td>@item.CostPrice</td>
+                            <td>@item.SellPrice</td>
+                            <td>@item.Discount</td>
+                            <td>@item.Quantity</td>
+                            <td><a class="btn btn-success" asp-action="Update" asp-route-id="@item.Id">Update</a></td>
+                            <td>
+                                <form asp-action="Delete" asp-route-id="@item.Id" method="post"
+                                      onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <partial name="_PaginationPartial" model="@(ViewBag.PaginationItems as PaginationItemsVM)">
+    </div>
+</div>
+

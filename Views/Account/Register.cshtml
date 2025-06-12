@@ -1,0 +1,56 @@
+﻿@model RegisterVM
+@{
+    ViewData["Title"] = "Register";
+}
+<!-- Start Login Register Area -->
+<div class="htc__login__register bg__white ptb--130" style="background: rgba(0, 0, 0, 0) url(images/bg/5.jpg) no-repeat scroll center center / cover ;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <ul class="login__register__menu nav justify-contend-center">
+                    <li class="login"><a asp-action="Login">Login</a></li>
+                    <li class="register active"><a class="active" asp-action="Register">Register</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Start Login Register Content -->
+        <div class="row tab-content justify-content-center">
+            <div class="col-md-6  ml-auto mr-auto">
+                <div class="htc__login__register__wrap">
+                    <!-- Start Single Content -->
+                    <div id="register" class="single__tabs__panel tab-pane active show">
+                        <form class="login" method="post">
+                            <input asp-for="Fullname" placeholder="Fullname">
+                            <span asp-validation-for="Fullname" class="text-danger"></span>
+                            <input asp-for="Username" placeholder="Username*">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                            <input asp-for="Email" placeholder="Email*">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Password" placeholder="Password*">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <input asp-for="RePassword" placeholder="Repreat password*">
+                            <span asp-validation-for="RePassword" class="text-danger"></span>
+                            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                            <div class="htc__login__btn">
+                                <button class="btn btn-danger">register</button>
+                            </div>
+                        </form>
+                        <div class="htc__social__connect">
+                            <h2>Or register With</h2>
+                            <div class="mt-4">
+                                <div class="d-flex justify-content-center">
+                                    <a asp-action="GoogleLogin" asp-controller="Account" class="btn btn-danger">
+                                        <i class="fab fa-google"></i> Google
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Content -->
+                </div>
+            </div>
+        </div>
+        <!-- End Login Register Content -->
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+body {
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+.owl-carousel {
+  direction: ltr;
+}
+
+.owl-carousel .owl-nav,
+.owl-carousel .owl-dots,
+.owl-carousel .owl-item {
+  direction: rtl;
+}
+
+.contact__input-box .bootstrap-select .dropdown-menu,
+.bootstrap-select .dropdown-toggle .filter-option {
+  text-align: right;
+}
+
+.list-unstyled {
+  padding-right: 0;
+}
+
+.benefit-three__thumb::after {
+  transform: rotate(180deg);
+  clip-path: polygon(100% 0, 0% 0%, 100% 100%);
+}
+
+.benefit-three__thumb::before {
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+.owl-nav button span {
+  transform: rotateY(180deg);
+}
+
+.blog-card-three__btn i,
+.cta-two__element,
+.cta-two__element-two {
+  transform: rotateY(180deg);
+}
+/*# sourceMappingURL=solinom-custom-rtl.css.map */

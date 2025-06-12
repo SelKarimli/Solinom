@@ -1,0 +1,13 @@
+﻿@model ResendEmailVM
+@{
+}
+<h2>Resend Email Confirmation</h2>
+
+<form asp-action="ResendEmailConfirmation" method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Resend Confirmation</button>
+</form>
